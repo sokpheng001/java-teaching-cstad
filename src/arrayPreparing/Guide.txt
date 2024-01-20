@@ -1,0 +1,10 @@
+        ArrayOrganizing<Integer> arrayOrganizing = new ArrayOrganizing<>();
+        Integer [] array = new Integer[]{1,2,3,4,5,6,7,8,7,9,0};
+        System.out.print("Original elements: ");
+        Arrays.stream(array).forEach(e-> System.out.print( e + " | "));
+        System.out.println();
+        System.out.print("Insert element to delete: ");
+        int elementWantedToDelete = new Scanner(System.in).nextInt();
+        System.out.print("");
+        Arrays.stream(arrayOrganizing.removeArrayByElement(array, elementWantedToDelete))
+                .forEach(element-> System.out.print(element + " | "));
