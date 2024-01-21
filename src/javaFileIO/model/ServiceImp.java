@@ -38,10 +38,23 @@ public class ServiceImp implements Service{
     @Override
     public void insertStudentToAFile(Student ... student) {
         try{
-//            fileCreation.saveDataToFile(studentData());
-            fileCreation.getDataFromFile();
+            fileCreation.saveDataToFile(studentData());
         }catch (Exception error){
             System.out.println("[!] Error!!!");
         }
+    }
+
+    @Override
+    public void selectAllStudents() {
+        try{
+            fileCreation.getDataFromFile();
+        }catch (Exception exception){
+            System.out.println("[!] Error during get all students from a file: " + exception.getMessage());
+        }
+    }
+
+    @Override
+    public void selectById(Integer id) {
+
     }
 }

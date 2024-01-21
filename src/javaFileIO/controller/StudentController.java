@@ -10,9 +10,8 @@ public class StudentController {
         service.insertStudentToAFile();
     }
     public void selectAllStudents(){
-
+        service.selectAllStudents();
     }
     public void selectStudentByID(){
-
     }
 }

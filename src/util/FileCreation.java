@@ -11,26 +11,18 @@ import java.util.List;
 public class FileCreation {
     private static File file;
     private static final String fileDataName = GlobalVariable.OUT_PUT_FILE_PATH.getPath() + "studentData.txt";
-    public void saveDataToFile(Student student) throws IOException {
-        file = new File(fileDataName);
-        try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileDataName, true))){
+    private static void writeDataToAFile(boolean append, Student student){
+        try(ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(fileDataName, append))){
             objectOutputStream.writeObject(student);
             System.out.println("========== ------------------------------- =========");
             System.out.println("           STUDENT DATA Saved successfully          ");
         }catch (Exception exception){
             System.out.println(exception.getMessage());
         }
-//        if(file.createNewFile()){
-//            System.out.println("========== ----------------------- =================");
-//            System.out.println("        Create STUDENT DATA FILE successfully       ");
-//            System.out.println("===");
-//        }
-//        if(new File(fileDataName).exists()){
-//            Path path = Paths.get(fileDataName);
-//            Files.write(path,(student.toString()+"\r\n---\r\n").getBytes(),StandardOpenOption.APPEND);
-//            System.out.println("========== ------------------------------- =========");
-//            System.out.println("           STUDENT DATA Saved successfully          ");
-//        }
+    }
+    public void saveDataToFile(Student student) throws IOException {
+        file = new File(fileDataName);
+        writeDataToAFile(!file.createNewFile(),student);
     }
     public void getDataFromFile(){
         List<Student> studentList = new ArrayList<>();
@@ -39,13 +31,15 @@ public class FileCreation {
                 try{
                     Student student = (Student) objectInputStream.readObject();
                     studentList.add(student);
-                }catch(IOException exception){
-                    System.out.println(exception.getMessage());
+                }catch(ClassNotFoundException |IOException exception){
+                    System.out.println("[!] Error during select student data: " + exception.getMessage());
+                    break;
                 }
             }
         }catch (Exception exception){
             System.out.println("[!] Error: " + exception.getMessage());
         }
+        System.out.println("========== ------------------------------- =========");
         studentList.forEach(System.out::println);
     }
 }
