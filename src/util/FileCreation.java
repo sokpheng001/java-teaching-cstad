@@ -35,16 +35,16 @@ public class FileCreation {
     public void getDataFromFile(){
         List<Student> studentList = new ArrayList<>();
         try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileDataName))){
-            try{
-                while (true){
+            while (true){
+                try{
                     Student student = (Student) objectInputStream.readObject();
                     studentList.add(student);
+                }catch(IOException exception){
+                    System.out.println(exception.getMessage());
                 }
-            }catch (EOFException exception){
-                System.out.println(exception.getMessage());
             }
         }catch (Exception exception){
-            System.out.println(exception.getMessage());
+            System.out.println("[!] Error: " + exception.getMessage());
         }
         studentList.forEach(System.out::println);
     }
