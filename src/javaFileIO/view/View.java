@@ -4,6 +4,7 @@ import javaFileIO.controller.StudentController;
 import javaFileIO.model.Service;
 import javaFileIO.model.Student;
 
+import java.io.EOFException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.UUID;
@@ -17,6 +18,25 @@ public class View {
         System.out.println("          Welcome to CSTAD DataText                 ");
         System.out.println("========== ----------------------- =================");
     }
+    private static void selectStudentOptions(){
+        System.out.println("====================================================");
+        System.out.println("1. Select all Students ");
+        System.out.println("2. Select by ID ");
+        System.out.println("==");
+        System.out.print("[+] Select option: ");
+        try{
+            option = scanner.nextInt();
+            switch (option){
+                case 1-> studentController.selectAllStudents();
+                case 2-> studentController.selectStudentByID();
+                default -> {
+                    System.out.println("Option is not matched");
+                }
+            };
+        }catch (Exception error){
+            selectStudentOptions();
+        }
+    }
     private static void crudOfStudent(){
         System.out.println("====================================================");
         System.out.println("1. Insert student ");
@@ -29,12 +49,14 @@ public class View {
             option = scanner.nextInt();
             switch (option){
                 case 1-> studentController.insertStudent();
+                case 2-> selectStudentOptions();
                 default -> {
                     System.out.println("Option is not matched");
                 }
             };
         }catch (Exception error){
-            System.out.println("[!] Error!!");
+            System.out.println("[!] Invalid option!!");
+            crudOfStudent();
         }
         System.out.println("====================================================");
     }
@@ -75,6 +97,10 @@ public class View {
         }
     }
     public static void getView(){
-        choose();
+        while (true){
+            choose();
+            System.out.print("PRESS Continue...");
+            new Scanner(System.in).nextLine();
+        }
     }
 }

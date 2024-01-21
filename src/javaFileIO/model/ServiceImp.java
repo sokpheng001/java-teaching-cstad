@@ -1,6 +1,7 @@
 package javaFileIO.model;
 
 import javaFileIO.model.studentDto.InsertStudentDto;
+import util.FileCreation;
 
 
 import java.util.Random;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 public class ServiceImp implements Service{
     private static Student student;
+    private final static FileCreation fileCreation = new FileCreation();
     private static final InsertStudentDto insertStudentDto = new InsertStudentDto();
     private static final Scanner scanner = new Scanner(System.in);
     private static final int idRandom = new Random().nextInt(100000000);
@@ -36,7 +38,8 @@ public class ServiceImp implements Service{
     @Override
     public void insertStudentToAFile(Student ... student) {
         try{
-            System.out.println(studentData());
+//            fileCreation.saveDataToFile(studentData());
+            fileCreation.getDataFromFile();
         }catch (Exception error){
             System.out.println("[!] Error!!!");
         }

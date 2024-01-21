@@ -1,6 +1,8 @@
 package javaFileIO.model;
 
-public class Student{
+import java.io.Serializable;
+
+public class Student implements Serializable {
     private Integer id;
     private String uuid;
     private String studentIDCard;
