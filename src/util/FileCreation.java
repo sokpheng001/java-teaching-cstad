@@ -5,6 +5,7 @@ import javaFileIO.model.Student;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -26,6 +27,7 @@ public class FileCreation {
     }
     public void getDataFromFile(){
         List<Student> studentList = new ArrayList<>();
+        Student [] students = new Student[0];
         try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(fileDataName))){
             while (true){
                 try{
@@ -41,5 +43,6 @@ public class FileCreation {
         }
         System.out.println("========== ------------------------------- =========");
         studentList.forEach(System.out::println);
+
     }
 }

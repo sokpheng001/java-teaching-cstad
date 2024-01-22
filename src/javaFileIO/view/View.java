@@ -70,6 +70,7 @@ public class View {
         System.out.println("[+] Options: ");
         System.out.println("[1] Student CRUD (Insert/Update/Read-Select/Delete): ");
         System.out.println("[2] File (Import/Export)");
+        System.out.println("[3] To Exit");
     }
     private static void process(int option){
         try{
@@ -77,6 +78,9 @@ public class View {
                 crudOfStudent();
             }else if(option==2){
                 fileOfStudent();
+            }else if(option==3){
+                System.out.println("[*] Terminated...");
+                System.exit(0);
             }
         }catch (Exception exception){
             System.out.println("[!] Error!!!");
